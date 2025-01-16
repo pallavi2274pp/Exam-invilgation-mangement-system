@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Invigilation Allocation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 50%, #f7f7f7, #004aad);
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding: 10px 0;
+            background: #34495e;
+            margin: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background: #1abc9c;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        h1 {
+            color: #004aad;
+            text-align: center;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .slot-row {
+            margin-bottom: 10px;
+        }
+
+        .slot-row label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .btn-submit {
+            margin-top: 20px;
+        }
+
+        #subjectFeedback {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Teacher Dashboard</h2>
+        <ul>
+            <li><a href="allocatedslots.html">Allocate Slots</a></li>
+            <li><a href="view_timetable.php">View Timetable</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Teacher Invigilation Allocation</h1>
+
+        <!-- Notification -->
+        <p id="notification" class="notification">
+            Please ensure you allocate a slot for <strong>Saturday Afternoon</strong> as it is mandatory.
+        </p>
+
+        <!-- Allocation Form -->
+        <form id="allocationForm" method="POST" action="allocatedslots.php">
+            <h2>Available Slots</h2>
+            <div class="slot-row">
+                <label>Monday Morning</label>
+                <input type="checkbox" name="slot[]" value="Monday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Monday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Monday Afternoon">
+            </div>
+            <div class="slot-row">
+                <label>Tuesday Morning</label>
+                <input type="checkbox" name="slot[]" value="Tuesday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Tuesday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Tuesday Afternoon">
+            </div>
+            <div class="slot-row">
+                <label>Wednesday Morning</label>
+                <input type="checkbox" name="slot[]" value="Wednesday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Wednesday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Wednesday Afternoon">
+            </div>
+            <div class="slot-row">
+                <label>Thursday Morning</label>
+                <input type="checkbox" name="slot[]" value="Thursday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Thursday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Thursday Afternoon">
+            </div>
+            <div class="slot-row">
+                <label>Friday Morning</label>
+                <input type="checkbox" name="slot[]" value="Friday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Friday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Friday Afternoon">
+            </div>
+            <div class="slot-row">
+                <label>Saturday Morning</label>
+                <input type="checkbox" name="slot[]" value="Saturday Morning">
+            </div>
+            <div class="slot-row">
+                <label>Saturday Afternoon</label>
+                <input type="checkbox" name="slot[]" value="Saturday Afternoon">
+            </div>
+
+            <!-- One-Credit Subjects -->
+            <h3>Select One-Credit Subjects (Max: 2)</h3>
+            <div class="slot-row">
+                <input type="checkbox" id="subject1" name="oneCreditSubject[]" value="Subject 1">
+                <label for="subject1">Subject 1</label>
+            </div>
+            <div class="slot-row">
+                <input type="checkbox" id="subject2" name="oneCreditSubject[]" value="Subject 2">
+                <label for="subject2">Subject 2</label>
+            </div>
+            <div class="slot-row">
+                <input type="checkbox" id="subject3" name="oneCreditSubject[]" value="Subject 3">
+                <label for="subject3">Subject 3</label>
+            </div>
+            <div class="slot-row">
+                <input type="checkbox" id="subject4" name="oneCreditSubject[]" value="Subject 4">
+                <label for="subject4">Subject 4</label>
+            </div>
+            <p id="subjectFeedback"></p>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-submit">Submit Allocation</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('allocationForm');
+            const oneCreditSubjects = document.querySelectorAll('input[name="oneCreditSubject[]"]');
+            const saturdayAfternoon = document.querySelector('input[value="Saturday Afternoon"]');
+            const notification = document.getElementById('notification');
+            const subjectFeedback = document.getElementById('subjectFeedback');
+
+            // Mandatory "Saturday Afternoon" Validation
+            form.addEventListener('submit', (e) => {
+                if (!saturdayAfternoon.checked) {
+                    notification.style.display = 'block';
+                    e.preventDefault(); // Prevent form submission
+                } else {
+                    notification.style.display = 'none';
+                }
+            });
+
+            // Max 2 One-Credit Subjects Validation
+            oneCreditSubjects.forEach((checkbox) => {
+                checkbox.addEventListener('change', () => {
+                    const selected = Array.from(oneCreditSubjects).filter(cb => cb.checked).length;
+
+                    if (selected > 2) {
+                        checkbox.checked = false; // Uncheck the last selected checkbox
+                        subjectFeedback.textContent = "You can select a maximum of 2 one-credit subjects.";
+                    } else {
+                        subjectFeedback.textContent = `You have selected ${selected} out of 2 allowed subjects.`;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

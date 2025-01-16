@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Invigilation System</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Soft pastel blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .button {
+            width: 180px;
+            height: 180px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .button svg {
+            width: 60px;
+            height: 60px;
+            fill: #4a90e2;
+        }
+
+        .button span {
+            margin-top: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+
+        /* Specific button colors */
+        .teacher svg {
+            fill: #ff8c42; /* Warm orange */
+        }
+
+        .teacher span {
+            color: #ff8c42;
+        }
+
+        .admin svg {
+            fill: #28c76f; /* Vibrant green */
+        }
+
+        .admin span {
+            color: #28c76f;
+        }
+
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .button {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <!-- Teacher Button -->
+        <a href="./teacher_login.html" class="button teacher" aria-label="Sign in as Teacher">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+            <span>Teacher</span>
+        </a>
+
+        <!-- Admin Button -->
+        <a href="adminlogin.html" class="button admin" aria-label="Sign in as Admin">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M10 3a2 2 0 1 0-4 0 2 2 0 0 0 4 0z"/>
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3z"/>
+            </svg>
+            <span>Admin</span>
+        </a>
+    </div>
+</body>
+</html>

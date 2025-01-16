@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking Status</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 50%, #04c6cf, #004aad);
+            font-family: Arial, sans-serif;
+            padding-top: 30px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+        .no-data {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Room Booking Status</h1>
+
+        <!-- Display booked rooms -->
+        <div id="bookedRooms">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Block</th>
+                        <th>Room Number</th>
+                        <th>Exam Date</th>
+                        <th>Exam Day</th>
+                    </tr>
+                </thead>
+                <tbody id="roomData">
+                    <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" id="noDataMessage" style="display: none;">
+            No rooms are currently booked.
+        </div>
+    </div>
+
+    <script>
+        // Fetch booked room data from the server
+        async function fetchBookedRooms() {
+            const response = await fetch('status.php');
+            const data = await response.json();
+
+            const roomData = document.getElementById('roomData');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            if (data.length > 0) {
+                roomData.innerHTML = ''; // Clear existing rows
+                noDataMessage.style.display = 'none'; // Hide no data message
+
+                // Populate the table with booked room data
+                data.forEach(room => {
+                    const row = `<tr>
+                        <td>${room.block}</td>
+                        <td>${room.room_number}</td>
+                        <td>${room.exam_date}</td>
+                        <td>${room.exam_day}</td>
+                    </tr>`;
+                    roomData.innerHTML += row;
+                });
+            } else {
+                // Show no data message if no rooms are booked
+                noDataMessage.style.display = 'block';
+            }
+        }
+
+        // Call the function to fetch and display booked rooms
+        fetchBookedRooms();
+    </script>
+</body>
+</html>

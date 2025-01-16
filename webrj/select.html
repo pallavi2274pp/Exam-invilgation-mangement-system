@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Slot Allocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher Slot Allocation</h1>
+    <p>Click the button below to select the slots for teachers.</p>
+    <!-- Updated Button Name -->
+    <button class="btn" onclick="allocateSlots()">Select Slot</button>
+
+    <div class="result">
+        <h2>Teacher Schedules</h2>
+        <p id="teacherWT"></p>
+        <p id="teacherAll"></p>
+    </div>
+
+    <script>
+        // Function to allocate slots
+        function allocateSlots() {
+            // Define the available slots
+            const slots = [
+                "Monday Slot 1", "Monday Slot 2",
+                "Tuesday Slot 1", "Tuesday Slot 2",
+                "Wednesday Slot 1", "Wednesday Slot 2",
+                "Thursday Slot 1", "Thursday Slot 2",
+                "Friday Slot 1", "Friday Slot 2",
+                "Saturday Afternoon"
+            ];
+
+            // Define teachers and their schedules
+            let schedule = {
+                "WT": [],
+                "All": []
+            };
+
+            // Assign Saturday afternoon slots to both teachers
+            schedule["WT"].push("Saturday Afternoon");
+            schedule["All"].push("Saturday Afternoon");
+
+            // Remove Saturday from available slots
+            let remainingSlots = slots.filter(slot => slot !== "Saturday Afternoon");
+
+            // Distribute remaining slots equally
+            for (let i = 0; i < remainingSlots.length; i++) {
+                let teacher = (i % 2 === 0) ? "WT" : "All";
+                schedule[teacher].push(remainingSlots[i]);
+            }
+
+            // Ensure each teacher gets exactly 2 one-credit subjects
+            let subjects = [
+                "Subject 1 (1 credit)", "Subject 2 (1 credit)",
+                "Subject 3 (1 credit)", "Subject 4 (1 credit)",
+                "Subject 5 (1 credit)", "Subject 6 (1 credit)",
+                "Subject 7 (1 credit)", "Subject 8 (1 credit)"
+            ];
+
+            // Assign 2 one-credit subjects to each teacher
+            schedule["WT"].push(subjects[0], subjects[1]);
+            schedule["All"].push(subjects[2], subjects[3]);
+
+            // Display the schedules
+            document.getElementById("teacherWT").innerHTML = "WT's Schedule: " + schedule["WT"].join(", ");
+            document.getElementById("teacherAll").innerHTML = "All's Schedule: " + schedule["All"].join(", ");
+        }
+    </script>
+</body>
+</html>

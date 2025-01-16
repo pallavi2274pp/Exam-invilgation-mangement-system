@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Body background with circular gradient */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 50%, #04c6cf, #004aad);
+      font-family: Arial, sans-serif;
+      padding-top: 30px; /* Adds space at the top of the page */
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background: radial-gradient(circle at 50% 50%, #04c6cf, #004aad);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding-top: 10px; /* Adds some padding inside the navbar */
+      padding-bottom: 10px; /* Adds some padding inside the navbar */
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-item {
+      margin-right: 25px; /* Adds space between navbar items */
+    }
+
+    .nav-link {
+      font-family: Cambria, serif;
+      letter-spacing: 3px;
+      color: #ffffff !important;
+    }
+
+    .nav-link:last-child {
+      margin-right: 30px;
+    }
+
+    /* Content container styles */
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #004aad;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="admin_dashboard.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="timetable.html">TIME TABLE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="status.html">STATUS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout.html">LOGOUT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+
+  <!-- Bootstrap JS (optional for toggler functionality) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
